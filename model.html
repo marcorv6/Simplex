@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model</title>
+    <link rel="icon" type="image/png" href="./images/favicon.ico" />
+    <link
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="estilos.css" />
+    <script src="./node_modules/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand">Simplex</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html"
+                  >Inicio</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <span class="h3">¿Cuál es el objetivo de la función?</span>
+        <select class="form-select" v-model="objetivo">
+          <option value="min">Minimizar</option>
+          <option value="max">Maximizar</option>
+        </select>
+        <p class="h3 mt-5 mb-1">Función:</p>
+        <div class="row">
+          <div class="col" v-for="(item, index) in FO">
+            <div class="input-group">
+              <span class="input-group-text">x{{index+1}}: </span>
+              <input class="form-control" type="number" v-model="FO[index]">
+            </div>
+          </div>
+        </div>
+        <p class="h3 mt-5">Restricciones</p>
+        <div class="row mb-3">
+          <div class="col-10">
+            <div class="my-2" v-for="(item, index1) in LD">
+              <div class="row">
+                <div class="col" v-for="(item, index2) in FO">
+                  <div class="input-group">
+                    <span class="input-group-text">x{{index2+1}}: </span>
+                    <input class="form-control" type="number" v-model="mat[index1][index2]">
+                  </div>
+                </div>
+              </div>              
+            </div>
+          </div>
+          <!--Separador-->
+          <div class="col-2">
+            <div  v-for="(item, index) in LD" class="my-2">
+              <div class="input-group">
+                <select v-model="operadores[index]">
+                  <option value="1"><=</option>
+                  <option value="2">>=</option>
+                  <option value="3">=</option>
+                </select>
+                <input class="form-control ml-2" type="number" v-model="LD[index]">
+              </div>
+            </div>
+          </div>
+          <div class="justify-content-center">
+            <span class="h5"  v-for="(item,index) in FO"> x{{index+1}}, </span>
+            <span class="h5"> > 0</span>
+          </div>
+        </div>
+        <a href="result.html">
+          <button
+            type="button"
+            class="btn btn-warning btn-lg boton"
+            @click="guardar()"
+          >
+            Aceptar
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <script src="./model.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  </body>
+</html>

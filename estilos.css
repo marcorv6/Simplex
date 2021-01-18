@@ -1,0 +1,10 @@
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+.container {
+    margin-top: 200px;
+}
+
+.boton {
+    width: 100%;
+}

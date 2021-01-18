@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcorv6/Simplex.git"
+    "url": "git+https://github.com/marcorv6/Simplex.git",
+    "start": "nodemon index"
   },
   "keywords": [
     "simplex"
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/marcorv6/Simplex#readme",
   "dependencies": {
+    "@popperjs/core": "^2.5.4",
     "bootstrap": "^5.0.0-beta1",
     "vue": "^2.6.12"
   }
