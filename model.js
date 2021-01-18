@@ -28,6 +28,12 @@ const app = new Vue({
           this.mat[i][j] = this.aux[i+j+((this.noVar-1)*i)];
         }
       }
+      localStorage.setItem("FO", this.FO);
+      localStorage.setItem("LD", this.LD);
+      localStorage.setItem("mat", this.mat);
+      localStorage.setItem("isMin", this.objetivoIsMin);
+      localStorage.setItem("operadores", this.operadores);
+
     }
   },
   created() {
