@@ -9,7 +9,6 @@
       href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="estilos.css" />
     <script src="./node_modules/vue/dist/vue.js"></script>
   </head>
   <body>
@@ -39,11 +38,11 @@
           </div>
         </div>
       </nav>
-      <div class="container">
+      <div class="container" style="margin-top: 5%;">
         <span class="h3">¿Cuál es el objetivo de la función?</span>
-        <select class="form-select" v-model="objetivo">
-          <option value="min">Minimizar</option>
-          <option value="max">Maximizar</option>
+        <select class="form-select" v-model="objetivoIsMin">
+          <option value="true">Minimizar</option>
+          <option value="false">Maximizar</option>
         </select>
         <p class="h3 mt-5 mb-1">Función:</p>
         <div class="row">
@@ -55,6 +54,8 @@
           </div>
         </div>
         <p class="h3 mt-5">Restricciones</p>
+        <p> {{mat}} </p>
+        <p> {{aux}} </p>
         <div class="row mb-3">
           <div class="col-10">
             <div class="my-2" v-for="(item, index1) in LD">
@@ -62,7 +63,7 @@
                 <div class="col" v-for="(item, index2) in FO">
                   <div class="input-group">
                     <span class="input-group-text">x{{index2+1}}: </span>
-                    <input class="form-control" type="number" v-model="mat[index1][index2]">
+                    <input class="form-control" type="number" v-model="aux[index1+index2+((noVar-1)*index1)]">
                   </div>
                 </div>
               </div>              
@@ -87,14 +88,15 @@
           </div>
         </div>
         <a href="result.html">
+        </a>
           <button
             type="button"
-            class="btn btn-warning btn-lg boton"
-            @click="guardar()"
+            class="btn btn-warning btn-lg"
+            style="width: 100%;"
+            @click="parseArrays()"
           >
             Aceptar
           </button>
-        </a>
       </div>
     </div>
 
