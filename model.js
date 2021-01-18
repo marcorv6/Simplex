@@ -20,7 +20,14 @@ const app = new Vue({
         if(i<this.noVar) this.FO[i] = Number(this.FO[i]);
         this.aux[i] = Number(this.aux[i]);
       }
-      console.log(this.LD, this.FO, this.aux);
+      this.arrayToMatrix();
+    },
+    arrayToMatrix(){
+      for(let i=0; i<this.noRes; i++){
+        for(let j=0; j<this.noVar; j++){
+          this.mat[i][j] = this.aux[i+j+((this.noVar-1)*i)];
+        }
+      }
     }
   },
   created() {
