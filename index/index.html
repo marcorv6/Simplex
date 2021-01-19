@@ -8,13 +8,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" type="image/png" href="./images/favicon.ico" />
+    <link rel="icon" type="image/png" href="../images/favicon.ico" />
     <link
-      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="estilos.css" />
-    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
   </head>
 
   <body>
@@ -44,7 +43,7 @@
           </div>
         </div>
       </nav>
-      <div class="container">
+      <div class="container" style="margin-top: 200px;">
         <p class="h1 title">Simplex calculator</p>
         <div class="my-3">
           <span class="h4"> Método: Simplex </span>
@@ -75,23 +74,24 @@
             v-model="noRes"
           />
         </div>
-        <a v-if="noRes && noVar" href="model.html">
+        <a v-if="noRes && noVar" href="../model/model.html">
           <button
             type="button"
-            class="btn btn-warning btn-lg boton"
+            style="width: 100%;"
+            class="btn btn-warning btn-lg"
             @click="guardar()"
           >
             Aceptar
           </button>
         </a>
-        <button type="button" disabled block class="btn btn-warning btn-lg boton" v-else>
+        <button type="button" disabled block class="btn btn-warning btn-lg" style="width: 100%;" v-else>
           Aceptar
         </button>
       </div>
     </div>
 
     <script src="./index.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   </body>
 </html>
