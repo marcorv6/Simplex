@@ -102,7 +102,6 @@ const app = new Vue({
 
       if (this.objetivoIsMin === true) {
         for (let i = 0; i < canon.length; i++){
-            console.log(FOAux)
             FOAux[i] *= -1
           }
       }
