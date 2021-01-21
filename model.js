@@ -1,4 +1,3 @@
-console.log("hola")
 const app = new Vue({
   el: "#app",
   data() {
@@ -7,6 +6,7 @@ const app = new Vue({
       noRes: Number(localStorage.getItem("noRes")),
       objetivoIsMin: true,
       mostrarTableau: false,
+      mostrarResultado: false,
       isOne:false,
       numero:"",
       LD: [],
@@ -18,7 +18,8 @@ const app = new Vue({
       canon:[],
       variablesDecision:[],
       cambioSigno:[],
-      arrayAux:[]
+      arrayAux:[],
+      resultado: {}
     };
   },
   methods: {
@@ -41,7 +42,6 @@ const app = new Vue({
       }
       this.mostrarTableau = true
       this.generarTableau()
-      // this.reset()
     },
 
     generarTableau(){
@@ -117,7 +117,6 @@ const app = new Vue({
       
 
       mat.unshift(FOAux) //Agrega elementos al inicio del arreglo 
-      console.log(mat)
     },
     asignarUno(index) {
       var operadores = this.operadores
@@ -138,7 +137,6 @@ const app = new Vue({
     },
   
     variableD() {
-      console.log(this.noRes)
       for (let i = 0; i < this.noVar; i++) {
         this.variablesDecision.push("X" + (i + 1))
       }
@@ -150,25 +148,9 @@ const app = new Vue({
 
       this.variablesDecision.push("LD")
     },
-
-    reset() {
-      //Esto no funciona
-      this.numero = ""
-      this.FO = []
-      this.LD = []
-      this.operadores = []
-      this.FOAux = []
-      this.mat = []
-      this.canon = []
-      this.variablesDecision = []
-      this.cambioSigno = []
-      this.arrayAux = []
-      
-    },
-
     mostrarResultados() {
-      console.log("Resultados mostrados")
-      simplexCompleto(this.mat)
+      this.mostrarResultado = true;
+      this.resultado = simplexCompleto(this.mat);
     }
   },
 
