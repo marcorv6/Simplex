@@ -1,3 +1,4 @@
+console.log("hola")
 const app = new Vue({
   el: "#app",
   data() {
@@ -167,6 +168,7 @@ const app = new Vue({
 
     mostrarResultados() {
       console.log("Resultados mostrados")
+      simplexCompleto(this.mat)
     }
   },
 
