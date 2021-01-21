@@ -229,7 +229,7 @@ const simplexCompleto = (tablon) => {
         tableau.indicador = 2;
     }
     
-    console.log(tableau.matriz)
+    console.log(tableau)
     return tableau;
 
 }
