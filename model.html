@@ -167,7 +167,7 @@
         <div v-if="mostrarResultado">
           <p class="h1">Resultados:</p>
           <div v-if="resultado.indicador === 0">
-            <p class="h3">Función objetivo: {{ resultado.solucion }}</p>
+            <p class="h3">Solución óptima: {{ resultado.solucion }}</p>
             <div
               class="my-2"
               v-for="(item, index) in resultado.vector_variables"
@@ -192,6 +192,9 @@
                 class="table table-warning table-striped table-sm table-responsive-md"
               >
                 <tr class="text-center">
+                  <td>--</td>
+                </tr>
+                <tr class="text-center">
                   <td>Z</td>
                 </tr>
 
@@ -207,6 +210,11 @@
               <table
                 class="table table-warning table-striped table-sm table-responsive-md"
               >
+                <thead>
+                  <tr class="text-center">
+                    <td v-for="item in headTabla">{{item}}</td>
+                  </tr>
+                </thead>
                 <tr class="text-center" v-for="array in resultado.matriz">
                   <td v-for="element in array">{{element}}</td>
                 </tr>

@@ -17,7 +17,8 @@ const app = new Vue({
       aux: [],
       canon:[],
       variablesDecision:[],
-      cambioSigno:[],
+      cambioSigno: [],
+      headTabla:[],
       arrayAux:[],
       resultado: {}
     };
@@ -151,6 +152,10 @@ const app = new Vue({
     mostrarResultados() {
       this.mostrarResultado = true;
       this.resultado = simplexCompleto(this.mat);
+      for (let i = 0; i < this.resultado.matriz[0].length - 1; i++){
+        this.headTabla.push("X" + (i+1))
+      }
+      this.headTabla.push("LD")
     },
     resetLocalStorage() {
       localStorage.clear()
