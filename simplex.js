@@ -1,22 +1,22 @@
-function tablonBigM(tablon){
+function tablonBigM(tablon, cont){
     num_rest = tablon.length-1;
     num_var = tablon[0].length-num_rest-1;
-    cont = 0;
+    cont[0] = 0;
     negativosLD = [];
 
     for(var i=0; i<num_rest; i++){
         if(tablon[i+1][tablon[0].length-1] < 0){
-            negativosLD[cont] = i+1;
-            cont++;
+            negativosLD[cont[0]] = i+1;
+            cont[0]++;
         }
     }
 
     let tablon_aux = [];
 
-    if(cont != 0){
+    if(cont[0] != 0){
         for (let i = 0; i < tablon.length-1 + 1; i++) {
             let array_aux = [];
-            for (let j = 0; j < tablon[0].length-tablon.length + (tablon.length-1) + 3; j++) {
+            for (let j = 0; j < tablon[0].length-tablon.length + (tablon.length-1) + 1 + cont[0]; j++) {
                 array_aux.push(0);
             }
             tablon_aux.push(array_aux);
@@ -37,7 +37,7 @@ function tablonBigM(tablon){
         let suma_ind = 0;
 
         for(var j=0; j<tablon_aux[0].length; j++){
-            for(var i=0; i<cont; i++){
+            for(var i=0; i<cont[0]; i++){
                 suma_ind += tablon_aux[negativosLD[i]][j];
 
                 tablon_aux[negativosLD[i]][j] = -tablon_aux[negativosLD[i]][j];
@@ -47,14 +47,19 @@ function tablonBigM(tablon){
             suma_ind = 0;
         }
 
+        for(let i=0; i<cont[0]; i++){
+            tablon_aux[negativosLD[i]][tablon_aux[0].length-1-cont[0]+i] = 1;
+        }
+
         for(var i=0; i<tablon_aux[0].length; i++){
             tablon_aux[0][i] = tablon_aux[0][i]+(1000*-1*suma[i]);
         }
 
         return tablon_aux;
-    }if(cont == 0){
+    }if(cont[0] == 0){
         return tablon;
     }
+
 }
 
 function encontarMax(matriz, maxFO) {//encuentra el maximo de la funcion objetivo y lo uarda en un arrelo junto con su posicion
@@ -173,7 +178,7 @@ function simplex(tablon, vect_sol_var, error){
             for (let i = 0; i < tablon.length-1 + 1; i++) {
                 let array_aux = [];
                 for (let j = 0; j < tablon[0].length-tablon.length + (tablon.length-1) + 1; j++) {
-                    array_aux.push(-1);
+                    array_aux.push(0);
                 }
                 tablon_aux.push(array_aux);
             }
@@ -192,21 +197,29 @@ function simplex(tablon, vect_sol_var, error){
 }
 
 
-const simplexCompleto = (tablon) => {
+function simplexCompleto(tablon){
     let error = [0];
+    let cont = [];
 
     let vect_sol_var = [];
     let vect_sol_val = [];
+    let var_art = [];
+    num_rest = tablon.length-1
+    num_var = tablon[0].length-num_rest-1;
 
     let tableau = {//Objeto tableau
         matriz: [],
         vector_variables: [],
         vector_valores: [],
         solucion: 0,
-        indicador: 0    //0 = si hay solucion, 1 = solucion no acotada, 2 = solucion igual a 0 o que no tiene solucion
+        indicador: 0    //0 = si hay solucion, 1 = solucion no acotada, 2 = solucion igual a 0 o que no tiene solucion, 3 = infactible
     };
 
-    tablon = tablonBigM(tablon);
+    tablon = tablonBigM(tablon, cont);
+
+    for(var i=0; i<cont; i++){
+        var_art[i] = "X"+(tablon[0].length-1-i);
+    }
 
     generarVectorSolucion(tablon, vect_sol_var, vect_sol_val);
 
@@ -220,6 +233,14 @@ const simplexCompleto = (tablon) => {
         tableau.indicador = 1;
     }
 
+    for(let i=0; i<num_var; i++){
+        for(let j=0; j<cont; j++){
+            if(var_art[j] === vect_sol_var[i]){
+                tableau.indicador = 3;
+            }
+        }
+    }
+
     tableau.matriz = tablon;
     tableau.vector_variables = vect_sol_var;
     tableau.vector_valores = vect_sol_val;
@@ -229,9 +250,11 @@ const simplexCompleto = (tablon) => {
         tableau.indicador = 2;
     }
     
-    console.log(tableau)
+    if(error[0] === 1){
+        tableau.indicador = 1;
+    }
+    
     return tableau;
 
 }
-
 
